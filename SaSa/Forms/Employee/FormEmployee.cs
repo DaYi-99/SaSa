@@ -25,6 +25,8 @@ namespace SaSa.Forms.Employee
         public FormEmployee()
         {
             InitializeComponent();
+            //Set di chuyển form theo thanh tiêu đề
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
         //-- 1. Form Employee  ---
@@ -376,15 +378,32 @@ namespace SaSa.Forms.Employee
         {
             FindData();
         }
-
-
-
         //-- 3. Close --
 
 
+        //Set di chuyển form theo thanh tiêu đề -- O
+        bool drag = false;
+        Point star = new Point(0, 0);
+        private void panelTopBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+            star = new Point(e.X, e.Y);
+        }
 
-        
+        private void panelTopBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (drag)
+            {
+                Point p = PointToScreen(e.Location);
+                this.Location = new Point(p.X - star.X, p.Y - star.Y);
+            }
+        }
 
+        private void panelTopBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+        //Set di chuyển form theo thanh tiêu đề -- X
     }
 }
 

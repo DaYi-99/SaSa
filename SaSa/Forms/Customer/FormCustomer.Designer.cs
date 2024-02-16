@@ -30,7 +30,12 @@ namespace SaSa.Forms.Customer
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCustomer));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTopBar = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ptClose = new System.Windows.Forms.PictureBox();
             this.dtsCustomer = new System.Data.DataSet();
             this.dataTable1 = new System.Data.DataTable();
@@ -39,8 +44,11 @@ namespace SaSa.Forms.Customer
             this.dataColumn3 = new System.Data.DataColumn();
             this.dataColumn4 = new System.Data.DataColumn();
             this.dataColumn5 = new System.Data.DataColumn();
-            this.dataColumn6 = new System.Data.DataColumn();
             this.panelThongTin = new System.Windows.Forms.Panel();
+            this.txtdc = new SaSa.RJ_Controls.RJ_Textbox();
+            this.txtdt = new SaSa.RJ_Controls.RJ_Textbox();
+            this.txttenkh = new SaSa.RJ_Controls.RJ_Textbox();
+            this.txtmakh = new SaSa.RJ_Controls.RJ_Textbox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,18 +60,14 @@ namespace SaSa.Forms.Customer
             this.tENKHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sDTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dIACHIDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tongSLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.btnHuy = new SaSa.RJ_Controls.RJ_Button();
             this.btnLuu = new SaSa.RJ_Controls.RJ_Button();
             this.btnSua = new SaSa.RJ_Controls.RJ_Button();
             this.btnXoa = new SaSa.RJ_Controls.RJ_Button();
             this.btnThem = new SaSa.RJ_Controls.RJ_Button();
-            this.txtdc = new SaSa.RJ_Controls.RJ_Textbox();
-            this.txtsdt = new SaSa.RJ_Controls.RJ_Textbox();
-            this.txttenkh = new SaSa.RJ_Controls.RJ_Textbox();
-            this.txtmakh = new SaSa.RJ_Controls.RJ_Textbox();
             this.panelTopBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtsCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).BeginInit();
@@ -76,12 +80,38 @@ namespace SaSa.Forms.Customer
             // panelTopBar
             // 
             this.panelTopBar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panelTopBar.Controls.Add(this.label5);
+            this.panelTopBar.Controls.Add(this.pictureBox1);
             this.panelTopBar.Controls.Add(this.ptClose);
             this.panelTopBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTopBar.Location = new System.Drawing.Point(0, 0);
             this.panelTopBar.Name = "panelTopBar";
             this.panelTopBar.Size = new System.Drawing.Size(800, 40);
             this.panelTopBar.TabIndex = 0;
+            this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.panelTopBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DarkBlue;
+            this.label5.Location = new System.Drawing.Point(58, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(153, 16);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "FORM KHÁCH HÀNG";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(39, 34);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // ptClose
             // 
@@ -109,8 +139,7 @@ namespace SaSa.Forms.Customer
             this.dataColumn2,
             this.dataColumn3,
             this.dataColumn4,
-            this.dataColumn5,
-            this.dataColumn6});
+            this.dataColumn5});
             this.dataTable1.TableName = "CUSTOMER";
             // 
             // dataColumn1
@@ -133,15 +162,10 @@ namespace SaSa.Forms.Customer
             // 
             this.dataColumn5.ColumnName = "DIACHI";
             // 
-            // dataColumn6
-            // 
-            this.dataColumn6.ColumnName = "TongSL";
-            this.dataColumn6.DataType = typeof(int);
-            // 
             // panelThongTin
             // 
             this.panelThongTin.Controls.Add(this.txtdc);
-            this.panelThongTin.Controls.Add(this.txtsdt);
+            this.panelThongTin.Controls.Add(this.txtdt);
             this.panelThongTin.Controls.Add(this.txttenkh);
             this.panelThongTin.Controls.Add(this.txtmakh);
             this.panelThongTin.Controls.Add(this.label4);
@@ -149,15 +173,105 @@ namespace SaSa.Forms.Customer
             this.panelThongTin.Controls.Add(this.label2);
             this.panelThongTin.Controls.Add(this.label1);
             this.panelThongTin.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelThongTin.ForeColor = System.Drawing.Color.Blue;
             this.panelThongTin.Location = new System.Drawing.Point(0, 40);
             this.panelThongTin.Name = "panelThongTin";
             this.panelThongTin.Size = new System.Drawing.Size(800, 92);
             this.panelThongTin.TabIndex = 1;
             // 
+            // txtdc
+            // 
+            this.txtdc.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtdc.BorderColor = System.Drawing.Color.DimGray;
+            this.txtdc.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtdc.BorderRadius = 0;
+            this.txtdc.BorderSize = 2;
+            this.txtdc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtdc.ForeColor = System.Drawing.Color.DimGray;
+            this.txtdc.Location = new System.Drawing.Point(428, 45);
+            this.txtdc.Margin = new System.Windows.Forms.Padding(2);
+            this.txtdc.Multiline = false;
+            this.txtdc.Name = "txtdc";
+            this.txtdc.Padding = new System.Windows.Forms.Padding(2);
+            this.txtdc.PasswordChar = false;
+            this.txtdc.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.txtdc.PlaceholderText = "";
+            this.txtdc.Size = new System.Drawing.Size(172, 21);
+            this.txtdc.TabIndex = 1;
+            this.txtdc.Texts = "";
+            this.txtdc.UnderlinedStyle = true;
+            // 
+            // txtdt
+            // 
+            this.txtdt.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtdt.BorderColor = System.Drawing.Color.DimGray;
+            this.txtdt.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtdt.BorderRadius = 0;
+            this.txtdt.BorderSize = 2;
+            this.txtdt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtdt.ForeColor = System.Drawing.Color.DimGray;
+            this.txtdt.Location = new System.Drawing.Point(428, 18);
+            this.txtdt.Margin = new System.Windows.Forms.Padding(2);
+            this.txtdt.Multiline = false;
+            this.txtdt.Name = "txtdt";
+            this.txtdt.Padding = new System.Windows.Forms.Padding(2);
+            this.txtdt.PasswordChar = false;
+            this.txtdt.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.txtdt.PlaceholderText = "";
+            this.txtdt.Size = new System.Drawing.Size(172, 21);
+            this.txtdt.TabIndex = 1;
+            this.txtdt.Texts = "";
+            this.txtdt.UnderlinedStyle = true;
+            // 
+            // txttenkh
+            // 
+            this.txttenkh.BackColor = System.Drawing.SystemColors.Menu;
+            this.txttenkh.BorderColor = System.Drawing.Color.DimGray;
+            this.txttenkh.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txttenkh.BorderRadius = 0;
+            this.txttenkh.BorderSize = 2;
+            this.txttenkh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txttenkh.ForeColor = System.Drawing.Color.DimGray;
+            this.txttenkh.Location = new System.Drawing.Point(133, 45);
+            this.txttenkh.Margin = new System.Windows.Forms.Padding(2);
+            this.txttenkh.Multiline = false;
+            this.txttenkh.Name = "txttenkh";
+            this.txttenkh.Padding = new System.Windows.Forms.Padding(2);
+            this.txttenkh.PasswordChar = false;
+            this.txttenkh.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.txttenkh.PlaceholderText = "";
+            this.txttenkh.Size = new System.Drawing.Size(172, 21);
+            this.txttenkh.TabIndex = 1;
+            this.txttenkh.Texts = "";
+            this.txttenkh.UnderlinedStyle = true;
+            // 
+            // txtmakh
+            // 
+            this.txtmakh.BackColor = System.Drawing.SystemColors.Menu;
+            this.txtmakh.BorderColor = System.Drawing.Color.DimGray;
+            this.txtmakh.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtmakh.BorderRadius = 0;
+            this.txtmakh.BorderSize = 2;
+            this.txtmakh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtmakh.ForeColor = System.Drawing.Color.DimGray;
+            this.txtmakh.Location = new System.Drawing.Point(133, 18);
+            this.txtmakh.Margin = new System.Windows.Forms.Padding(2);
+            this.txtmakh.Multiline = false;
+            this.txtmakh.Name = "txtmakh";
+            this.txtmakh.Padding = new System.Windows.Forms.Padding(2);
+            this.txtmakh.PasswordChar = false;
+            this.txtmakh.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.txtmakh.PlaceholderText = "";
+            this.txtmakh.Size = new System.Drawing.Size(172, 21);
+            this.txtmakh.TabIndex = 1;
+            this.txtmakh.Texts = "";
+            this.txtmakh.UnderlinedStyle = true;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(317, 49);
+            this.label4.ForeColor = System.Drawing.Color.Blue;
+            this.label4.Location = new System.Drawing.Point(346, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 0;
@@ -166,7 +280,8 @@ namespace SaSa.Forms.Customer
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(317, 22);
+            this.label3.ForeColor = System.Drawing.Color.Blue;
+            this.label3.Location = new System.Drawing.Point(346, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 0;
@@ -175,6 +290,7 @@ namespace SaSa.Forms.Customer
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Blue;
             this.label2.Location = new System.Drawing.Point(30, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
@@ -184,6 +300,7 @@ namespace SaSa.Forms.Customer
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(30, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 13);
@@ -202,22 +319,54 @@ namespace SaSa.Forms.Customer
             // 
             // drvCustomer
             // 
+            this.drvCustomer.AllowUserToAddRows = false;
+            this.drvCustomer.AllowUserToDeleteRows = false;
+            this.drvCustomer.AllowUserToResizeColumns = false;
+            this.drvCustomer.AllowUserToResizeRows = false;
             this.drvCustomer.AutoGenerateColumns = false;
             this.drvCustomer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.drvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.drvCustomer.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.drvCustomer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.drvCustomer.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.drvCustomer.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.drvCustomer.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.OrangeRed;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.drvCustomer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.drvCustomer.ColumnHeadersHeight = 41;
             this.drvCustomer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sTTDataGridViewTextBoxColumn,
             this.mAKHDataGridViewTextBoxColumn,
             this.tENKHDataGridViewTextBoxColumn,
             this.sDTDataGridViewTextBoxColumn,
-            this.dIACHIDataGridViewTextBoxColumn,
-            this.tongSLDataGridViewTextBoxColumn});
+            this.dIACHIDataGridViewTextBoxColumn});
             this.drvCustomer.DataMember = "CUSTOMER";
             this.drvCustomer.DataSource = this.dtsCustomer;
             this.drvCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drvCustomer.EnableHeadersVisualStyles = false;
             this.drvCustomer.Location = new System.Drawing.Point(30, 30);
             this.drvCustomer.Name = "drvCustomer";
+            this.drvCustomer.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.OrangeRed;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.drvCustomer.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.drvCustomer.RowHeadersVisible = false;
+            this.drvCustomer.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            this.drvCustomer.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.drvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.drvCustomer.Size = new System.Drawing.Size(740, 208);
+            this.drvCustomer.StandardTab = true;
             this.drvCustomer.TabIndex = 0;
             this.drvCustomer.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.drvCustomer_CellClick);
             this.drvCustomer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.drvCustomer_CellDoubleClick);
@@ -231,32 +380,26 @@ namespace SaSa.Forms.Customer
             // mAKHDataGridViewTextBoxColumn
             // 
             this.mAKHDataGridViewTextBoxColumn.DataPropertyName = "MAKH";
-            this.mAKHDataGridViewTextBoxColumn.HeaderText = "MAKH";
+            this.mAKHDataGridViewTextBoxColumn.HeaderText = "Mã khách hàng";
             this.mAKHDataGridViewTextBoxColumn.Name = "mAKHDataGridViewTextBoxColumn";
             // 
             // tENKHDataGridViewTextBoxColumn
             // 
             this.tENKHDataGridViewTextBoxColumn.DataPropertyName = "TENKH";
-            this.tENKHDataGridViewTextBoxColumn.HeaderText = "TENKH";
+            this.tENKHDataGridViewTextBoxColumn.HeaderText = "Tên khách hàng";
             this.tENKHDataGridViewTextBoxColumn.Name = "tENKHDataGridViewTextBoxColumn";
             // 
             // sDTDataGridViewTextBoxColumn
             // 
             this.sDTDataGridViewTextBoxColumn.DataPropertyName = "SDT";
-            this.sDTDataGridViewTextBoxColumn.HeaderText = "SDT";
+            this.sDTDataGridViewTextBoxColumn.HeaderText = "Điện thoại";
             this.sDTDataGridViewTextBoxColumn.Name = "sDTDataGridViewTextBoxColumn";
             // 
             // dIACHIDataGridViewTextBoxColumn
             // 
             this.dIACHIDataGridViewTextBoxColumn.DataPropertyName = "DIACHI";
-            this.dIACHIDataGridViewTextBoxColumn.HeaderText = "DIACHI";
+            this.dIACHIDataGridViewTextBoxColumn.HeaderText = "Địa chỉ";
             this.dIACHIDataGridViewTextBoxColumn.Name = "dIACHIDataGridViewTextBoxColumn";
-            // 
-            // tongSLDataGridViewTextBoxColumn
-            // 
-            this.tongSLDataGridViewTextBoxColumn.DataPropertyName = "TongSL";
-            this.tongSLDataGridViewTextBoxColumn.HeaderText = "TongSL";
-            this.tongSLDataGridViewTextBoxColumn.Name = "tongSLDataGridViewTextBoxColumn";
             // 
             // panelFooter
             // 
@@ -396,90 +539,6 @@ namespace SaSa.Forms.Customer
             this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // txtdc
-            // 
-            this.txtdc.BorderColor = System.Drawing.Color.Maroon;
-            this.txtdc.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtdc.BorderRadius = 0;
-            this.txtdc.BorderSize = 0;
-            this.txtdc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtdc.ForeColor = System.Drawing.Color.DimGray;
-            this.txtdc.Location = new System.Drawing.Point(399, 46);
-            this.txtdc.Margin = new System.Windows.Forms.Padding(4);
-            this.txtdc.Multiline = false;
-            this.txtdc.Name = "txtdc";
-            this.txtdc.Padding = new System.Windows.Forms.Padding(7);
-            this.txtdc.PasswordChar = false;
-            this.txtdc.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.txtdc.PlaceholderText = "";
-            this.txtdc.Size = new System.Drawing.Size(116, 31);
-            this.txtdc.TabIndex = 1;
-            this.txtdc.Texts = "";
-            this.txtdc.UnderlinedStyle = true;
-            // 
-            // txtsdt
-            // 
-            this.txtsdt.BorderColor = System.Drawing.Color.Maroon;
-            this.txtsdt.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtsdt.BorderRadius = 0;
-            this.txtsdt.BorderSize = 0;
-            this.txtsdt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtsdt.ForeColor = System.Drawing.Color.DimGray;
-            this.txtsdt.Location = new System.Drawing.Point(399, 7);
-            this.txtsdt.Margin = new System.Windows.Forms.Padding(4);
-            this.txtsdt.Multiline = false;
-            this.txtsdt.Name = "txtsdt";
-            this.txtsdt.Padding = new System.Windows.Forms.Padding(7);
-            this.txtsdt.PasswordChar = false;
-            this.txtsdt.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.txtsdt.PlaceholderText = "";
-            this.txtsdt.Size = new System.Drawing.Size(116, 31);
-            this.txtsdt.TabIndex = 1;
-            this.txtsdt.Texts = "";
-            this.txtsdt.UnderlinedStyle = true;
-            // 
-            // txttenkh
-            // 
-            this.txttenkh.BorderColor = System.Drawing.Color.Maroon;
-            this.txttenkh.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txttenkh.BorderRadius = 0;
-            this.txttenkh.BorderSize = 0;
-            this.txttenkh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txttenkh.ForeColor = System.Drawing.Color.DimGray;
-            this.txttenkh.Location = new System.Drawing.Point(133, 46);
-            this.txttenkh.Margin = new System.Windows.Forms.Padding(4);
-            this.txttenkh.Multiline = false;
-            this.txttenkh.Name = "txttenkh";
-            this.txttenkh.Padding = new System.Windows.Forms.Padding(7);
-            this.txttenkh.PasswordChar = false;
-            this.txttenkh.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.txttenkh.PlaceholderText = "";
-            this.txttenkh.Size = new System.Drawing.Size(116, 31);
-            this.txttenkh.TabIndex = 1;
-            this.txttenkh.Texts = "";
-            this.txttenkh.UnderlinedStyle = true;
-            // 
-            // txtmakh
-            // 
-            this.txtmakh.BorderColor = System.Drawing.Color.Maroon;
-            this.txtmakh.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtmakh.BorderRadius = 0;
-            this.txtmakh.BorderSize = 0;
-            this.txtmakh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtmakh.ForeColor = System.Drawing.Color.DimGray;
-            this.txtmakh.Location = new System.Drawing.Point(133, 7);
-            this.txtmakh.Margin = new System.Windows.Forms.Padding(4);
-            this.txtmakh.Multiline = false;
-            this.txtmakh.Name = "txtmakh";
-            this.txtmakh.Padding = new System.Windows.Forms.Padding(7);
-            this.txtmakh.PasswordChar = false;
-            this.txtmakh.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.txtmakh.PlaceholderText = "";
-            this.txtmakh.Size = new System.Drawing.Size(116, 31);
-            this.txtmakh.TabIndex = 1;
-            this.txtmakh.Texts = "";
-            this.txtmakh.UnderlinedStyle = true;
-            // 
             // FormCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,6 +554,8 @@ namespace SaSa.Forms.Customer
             this.Text = "FormCustomer";
             this.Load += new System.EventHandler(this.FormCustomer_Load);
             this.panelTopBar.ResumeLayout(false);
+            this.panelTopBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtsCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).EndInit();
@@ -518,29 +579,29 @@ namespace SaSa.Forms.Customer
         private System.Data.DataColumn dataColumn3;
         private System.Data.DataColumn dataColumn4;
         private System.Data.DataColumn dataColumn5;
-        private System.Data.DataColumn dataColumn6;
         private System.Windows.Forms.Panel panelThongTin;
-        private RJ_Controls.RJ_Textbox txtdc;
-        private RJ_Controls.RJ_Textbox txtsdt;
-        private RJ_Controls.RJ_Textbox txttenkh;
-        private RJ_Controls.RJ_Textbox txtmakh;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelCustomer;
         private System.Windows.Forms.DataGridView drvCustomer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sTTDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mAKHDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tENKHDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sDTDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dIACHIDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tongSLDataGridViewTextBoxColumn;
         private RJ_Controls.RJ_Button btnLuu;
         private RJ_Controls.RJ_Button btnHuy;
         private System.Windows.Forms.Panel panelFooter;
         private RJ_Controls.RJ_Button btnSua;
         private RJ_Controls.RJ_Button btnXoa;
         private RJ_Controls.RJ_Button btnThem;
+        private RJ_Controls.RJ_Textbox txtmakh;
+        private RJ_Controls.RJ_Textbox txtdc;
+        private RJ_Controls.RJ_Textbox txtdt;
+        private RJ_Controls.RJ_Textbox txttenkh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTTDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mAKHDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tENKHDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sDTDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dIACHIDataGridViewTextBoxColumn;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label5;
     }
 }

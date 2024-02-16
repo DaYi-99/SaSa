@@ -13,18 +13,27 @@ create table NHANVIEN
 )
 
 
-
+drop table KHACHHANG
 -- 2. Bảng khách hàng
 CREATE TABLE KHACHHANG
 (
-	MAKH	CHAR(10) not null,
+	MAKH	CHAR(10) primary key,
 	TENKH	NVARCHAR(200) not null,
 	SDT		CHAR(10)	not null,
 	DC		NVARCHAR(500) not null
 )
 
 
--- 3. Bảng sản phẩm drop table SANPHAM
+drop table MATHANG
+-- 3. Bảng mặt hàng
+create table MATHANG
+(
+	MAMH	char(10)	not null primary key,
+	TENMH	nvarchar(200) not null
+)
+
+drop table SANPHAM
+-- 4. Bảng sản phẩm drop table SANPHAM
 CREATE TABLE SANPHAM
 (
 	MASP	char(10) primary key,
@@ -33,22 +42,21 @@ CREATE TABLE SANPHAM
 	DONGIA	Decimal(18,0) CHECK (DONGIA>=0),
 	SLTON	INT,
 	MAMH	char(10),
-	NGAYCN	DATETIME
+	NGAYCN	DATETIME,
+	CONSTRAINT fk_sp_mh FOREIGN KEY (MAMH) REFERENCES MATHANG (MAMH)
 )
 
-
--- 4. Bảng mặt hàng
-create table MATHANG
-(
-	MAMH	char(10)	not null primary key,
-	TENMH	nvarchar(200) not null
-)
+insert into SANPHAM values ('SP_1',N'khăn 86',N'cái',350,1000,'MH_1',GETDATE())
 
 
+
+
+
+drop table NCU
 -- 5. Bảng nhà cung ứng
 CREATE TABLE NCU
 (
-	MANCU	INT IDENTITY(1,1),
+	MANCU	char(10) primary key,
 	TENNCU	NVARCHAR(200)	not null,
 	SDTNCU	CHAR(10)	not null,
 	DC		NVARCHAR(500) not null,
@@ -57,7 +65,9 @@ CREATE TABLE NCU
 	SDTSEP	CHAR(10) not null
 )
 
+
 DROP TABLE HDB
+-- 6. Bảng hoá đơn bán
 create table HDB
 (
 MAHDB		char(10) not null primary key,
@@ -69,8 +79,25 @@ DATHU		Decimal(18,0) not null,
 CHUATHU		Decimal(18,0) not null,
 )
 
+
+set dateformat dmy
+insert into HDB values ('hdb1','nv_0001',getdate(),'kh_1',1,1,0)
+
+-- hoa don ban
+	alter table HDB_CT nocheck constraint all 
+	delete from HDB
+	alter table HDB_CT check constraint all
+delete from HDB_CT 
+
+--- hoa don mua
+	alter table HDM_CT nocheck constraint all
+	delete from HDM
+	alter table HDM_CT check constraint all
+delete from HDM_CT
+
+
 DROP TABLE HDB_CT
--- 6. Bảng hoá đơn bán
+-- 7. Bảng hoá đơn bán chi tiết
 CREATE TABLE HDB_CT
 (
 	MAHDB		char(10) not null,
@@ -84,21 +111,65 @@ CREATE TABLE HDB_CT
 )
 
 
--- 7. Bảng hoá đơn mua
+drop table HDM
+-- 8. Bảng hoá đơn mua
 CREATE TABLE HDM
 (
-	MAHDM		INT IDENTITY(1,1),
-	MANCU		INT,
-	TENNCU		NVARCHAR(200),
-	TENSP		NVARCHAR(200),
-	MAMH		INT,
-	SL			INT,
-	DONGIA		Decimal(18,0) CHECK (DONGIA>=0),
-	THANHTIEN	Decimal(18,0) CHECK (THANHTIEN>=0),
-	NGAYMUA		DATETIME,
-	TONGTIEN	Decimal(18,0) CHECK (TONGTIEN>=0),
+	MAHDM		char(10) primary key,
+	MANCU		char(10) not null,
+	TENNCU		NVARCHAR(200) not null,
+	NGAYMUA		DATETIME not null,
+	TONGTIEN	Decimal(18,0) CHECK (TONGTIEN>=0) not null,
 	DATT		Decimal(18,0),
 	CHUATT		Decimal(18,0)
 )
 
 
+drop table HDM_CT
+-- 9. Bảng hoá đơn mua chi tiết
+create table HDM_CT
+(
+	MAHDM		char(10) not null,
+	MASP		CHAR(10) not null,
+	MAMH		CHAR(10) not null,
+	SL			INT not null,
+	DONGIA		Decimal(18,0) CHECK (DONGIA>=0) not null,
+	THANHTIEN	Decimal(18,0) CHECK (THANHTIEN>=0) not null,
+	CONSTRAINT fk_hdm_ct_hdb FOREIGN KEY (MAHDM) REFERENCES HDM (MAHDM),
+	CONSTRAINT fk_hdbm_ct_sp FOREIGN KEY (MASP) REFERENCES SANPHAM (MASP),
+	CONSTRAINT fk_hdbm_ct_mh FOREIGN KEY (MAMH) REFERENCES MATHANG (MAMH)
+)
+
+
+
+--- Tạo bảng tạm
+
+DROP TABLE HDB
+create table HDB_Tam
+(
+MAHDB		char(10) not null primary key,
+MANV		char(10) not null,
+NGAY_HDB	datetime not null,
+MAKH		char(10) not null,
+TongTien	Decimal(18,0) CHECK (TongTien>=0) not null,
+DATHU		Decimal(18,0) not null,
+CHUATHU		Decimal(18,0) not null,
+)
+
+DROP TABLE HDB_CT
+
+CREATE TABLE HDB_CT_Tam
+(
+	MAHDB		char(10) not null,
+	MASP		char(10) not null,
+	SL			INT not null,
+	DONGIA		Decimal(18,0) CHECK (DONGIA>=0) not null,
+	THANHTIEN	Decimal(18,0) CHECK (THANHTIEN>=0) not null,
+)
+delete from HDB_Tam
+delete from HDB_CT_Tam
+--- Tạo bảng tạm
+
+select SUM(THANHTIEN) from HDB_CT_Tam where MAHDB= 'HDB_00003'
+
+select a.TENKH from KHACHHANG as a, HDB_Tam as b where a.MAKH = b.MAKH 

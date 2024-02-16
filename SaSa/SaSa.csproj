@@ -33,8 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,17 +53,39 @@
   <ItemGroup>
     <Compile Include="BUS\BUS_Connect.cs" />
     <Compile Include="BUS\BUS_Customer.cs" />
+    <Compile Include="BUS\BUS_Invoice.cs" />
     <Compile Include="BUS\BUS_Product.cs" />
+    <Compile Include="BUS\BUS_Purchase.cs" />
     <Compile Include="BUS\BUS_Staff.cs" />
+    <Compile Include="CR_Invoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CR_Invoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DAL\DAL_Connect.cs" />
     <Compile Include="DAL\DAL_Customer.cs" />
+    <Compile Include="DAL\DAL_Invoice.cs" />
     <Compile Include="DAL\DAL_Product.cs" />
+    <Compile Include="DAL\DAL_Purchase.cs" />
     <Compile Include="DAL\DAL_Staff.cs" />
+    <Compile Include="DataSet_HDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet_HDB.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DTO\DTO_Connect.cs" />
     <Compile Include="DTO\DTO_Customer.cs" />
+    <Compile Include="DTO\DTO_Invoice.cs" />
     <Compile Include="DTO\DTO_Product.cs" />
     <Compile Include="DTO\DTO_ProductType.cs" />
     <Compile Include="DTO\DTO_Staff.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,11 +116,29 @@
     <Compile Include="Forms\Employee\FormEmployee.Designer.cs">
       <DependentUpon>FormEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Invoice\FormInfoInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Invoice\FormInfoInvoice.Designer.cs">
+      <DependentUpon>FormInfoInvoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Invoice\FormInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Invoice\FormInvoice.Designer.cs">
       <DependentUpon>FormInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Invoice\FormViewInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Invoice\FormViewInvoice.Designer.cs">
+      <DependentUpon>FormViewInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Invoice\PrintInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Invoice\PrintInvoice.Designer.cs">
+      <DependentUpon>PrintInvoice.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Product\FormProduct.cs">
       <SubType>Form</SubType>
@@ -106,6 +151,12 @@
     </Compile>
     <Compile Include="Forms\Product\FormProductType.Designer.cs">
       <DependentUpon>FormProductType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Profit\FormProfit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Profit\FormProfit.Designer.cs">
+      <DependentUpon>FormProfit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Supplier\FormPurchase.cs">
       <SubType>Form</SubType>
@@ -130,6 +181,13 @@
     <Compile Include="RJ_Controls\RJ_Textbox.Designer.cs">
       <DependentUpon>RJ_Textbox.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CR_Invoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CR_Invoice.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,14 +203,26 @@
     <EmbeddedResource Include="Forms\Employee\FormEmployee.resx">
       <DependentUpon>FormEmployee.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Invoice\FormInfoInvoice.resx">
+      <DependentUpon>FormInfoInvoice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Invoice\FormInvoice.resx">
       <DependentUpon>FormInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Invoice\FormViewInvoice.resx">
+      <DependentUpon>FormViewInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Invoice\PrintInvoice.resx">
+      <DependentUpon>PrintInvoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Product\FormProduct.resx">
       <DependentUpon>FormProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Product\FormProductType.resx">
       <DependentUpon>FormProductType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Profit\FormProfit.resx">
+      <DependentUpon>FormProfit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Supplier\FormPurchase.resx">
       <DependentUpon>FormPurchase.cs</DependentUpon>
@@ -172,6 +242,17 @@
     <EmbeddedResource Include="RJ_Controls\RJ_Textbox.resx">
       <DependentUpon>RJ_Textbox.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataSet_HDB.xsc">
+      <DependentUpon>DataSet_HDB.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet_HDB.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet_HDB.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet_HDB.xss">
+      <DependentUpon>DataSet_HDB.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -185,8 +266,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Forms\Profit\" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

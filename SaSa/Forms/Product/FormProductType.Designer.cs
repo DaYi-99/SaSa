@@ -30,57 +30,62 @@ namespace SaSa.Forms.Product
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProductType));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelTitle = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.ptClose = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMAMH = new System.Windows.Forms.TextBox();
             this.txtTENMH = new System.Windows.Forms.TextBox();
-            this.pt_img = new System.Windows.Forms.PictureBox();
             this.drvProductType = new System.Windows.Forms.DataGridView();
-            this.btnimg = new System.Windows.Forms.Button();
-            this.ptAdd = new System.Windows.Forms.PictureBox();
-            this.ptDelete = new System.Windows.Forms.PictureBox();
-            this.ptEdit = new System.Windows.Forms.PictureBox();
+            this.sTTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mAMHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tENMHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtsProductType = new System.Data.DataSet();
             this.dataTable1 = new System.Data.DataTable();
             this.dataColumn1 = new System.Data.DataColumn();
             this.dataColumn2 = new System.Data.DataColumn();
             this.dataColumn3 = new System.Data.DataColumn();
-            this.sTTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mAMHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tENMHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ptAdd = new System.Windows.Forms.PictureBox();
+            this.ptDelete = new System.Windows.Forms.PictureBox();
+            this.ptEdit = new System.Windows.Forms.PictureBox();
+            this.txtVal = new System.Windows.Forms.TextBox();
+            this.lbtb = new System.Windows.Forms.Label();
             this.btnCancel = new SaSa.RJ_Controls.RJ_Button();
             this.btnSave = new SaSa.RJ_Controls.RJ_Button();
-            this.panel1.SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panelTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pt_img)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drvProductType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtsProductType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtsProductType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelTitle
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.ptClose);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(479, 40);
-            this.panel1.TabIndex = 2;
+            this.panelTitle.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panelTitle.Controls.Add(this.pictureBox1);
+            this.panelTitle.Controls.Add(this.label1);
+            this.panelTitle.Controls.Add(this.ptClose);
+            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitle.Location = new System.Drawing.Point(0, 0);
+            this.panelTitle.Name = "panelTitle";
+            this.panelTitle.Size = new System.Drawing.Size(479, 40);
+            this.panelTitle.TabIndex = 2;
+            this.panelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseDown);
+            this.panelTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseMove);
+            this.panelTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Yellow;
-            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Location = new System.Drawing.Point(50, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(127, 16);
             this.label1.TabIndex = 2;
@@ -131,14 +136,6 @@ namespace SaSa.Forms.Product
             this.txtTENMH.Size = new System.Drawing.Size(174, 20);
             this.txtTENMH.TabIndex = 4;
             // 
-            // pt_img
-            // 
-            this.pt_img.Location = new System.Drawing.Point(310, 46);
-            this.pt_img.Name = "pt_img";
-            this.pt_img.Size = new System.Drawing.Size(127, 117);
-            this.pt_img.TabIndex = 5;
-            this.pt_img.TabStop = false;
-            // 
             // drvProductType
             // 
             this.drvProductType.AutoGenerateColumns = false;
@@ -154,46 +151,25 @@ namespace SaSa.Forms.Product
             this.drvProductType.Name = "drvProductType";
             this.drvProductType.Size = new System.Drawing.Size(403, 178);
             this.drvProductType.TabIndex = 6;
+            this.drvProductType.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.drvProductType_CellClick);
             // 
-            // btnimg
+            // sTTDataGridViewTextBoxColumn
             // 
-            this.btnimg.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnimg.Location = new System.Drawing.Point(261, 133);
-            this.btnimg.Name = "btnimg";
-            this.btnimg.Size = new System.Drawing.Size(43, 30);
-            this.btnimg.TabIndex = 7;
-            this.btnimg.Text = "...";
-            this.btnimg.UseVisualStyleBackColor = true;
+            this.sTTDataGridViewTextBoxColumn.DataPropertyName = "STT";
+            this.sTTDataGridViewTextBoxColumn.HeaderText = "STT";
+            this.sTTDataGridViewTextBoxColumn.Name = "sTTDataGridViewTextBoxColumn";
             // 
-            // ptAdd
+            // mAMHDataGridViewTextBoxColumn
             // 
-            this.ptAdd.Image = ((System.Drawing.Image)(resources.GetObject("ptAdd.Image")));
-            this.ptAdd.Location = new System.Drawing.Point(34, 133);
-            this.ptAdd.Name = "ptAdd";
-            this.ptAdd.Size = new System.Drawing.Size(36, 30);
-            this.ptAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptAdd.TabIndex = 8;
-            this.ptAdd.TabStop = false;
+            this.mAMHDataGridViewTextBoxColumn.DataPropertyName = "MAMH";
+            this.mAMHDataGridViewTextBoxColumn.HeaderText = "MAMH";
+            this.mAMHDataGridViewTextBoxColumn.Name = "mAMHDataGridViewTextBoxColumn";
             // 
-            // ptDelete
+            // tENMHDataGridViewTextBoxColumn
             // 
-            this.ptDelete.Image = ((System.Drawing.Image)(resources.GetObject("ptDelete.Image")));
-            this.ptDelete.Location = new System.Drawing.Point(76, 133);
-            this.ptDelete.Name = "ptDelete";
-            this.ptDelete.Size = new System.Drawing.Size(36, 30);
-            this.ptDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptDelete.TabIndex = 8;
-            this.ptDelete.TabStop = false;
-            // 
-            // ptEdit
-            // 
-            this.ptEdit.Image = ((System.Drawing.Image)(resources.GetObject("ptEdit.Image")));
-            this.ptEdit.Location = new System.Drawing.Point(118, 133);
-            this.ptEdit.Name = "ptEdit";
-            this.ptEdit.Size = new System.Drawing.Size(36, 30);
-            this.ptEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptEdit.TabIndex = 8;
-            this.ptEdit.TabStop = false;
+            this.tENMHDataGridViewTextBoxColumn.DataPropertyName = "TENMH";
+            this.tENMHDataGridViewTextBoxColumn.HeaderText = "TENMH";
+            this.tENMHDataGridViewTextBoxColumn.Name = "tENMHDataGridViewTextBoxColumn";
             // 
             // dtsProductType
             // 
@@ -221,23 +197,59 @@ namespace SaSa.Forms.Product
             // 
             this.dataColumn3.ColumnName = "TENMH";
             // 
-            // sTTDataGridViewTextBoxColumn
+            // ptAdd
             // 
-            this.sTTDataGridViewTextBoxColumn.DataPropertyName = "STT";
-            this.sTTDataGridViewTextBoxColumn.HeaderText = "STT";
-            this.sTTDataGridViewTextBoxColumn.Name = "sTTDataGridViewTextBoxColumn";
+            this.ptAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptAdd.Image = ((System.Drawing.Image)(resources.GetObject("ptAdd.Image")));
+            this.ptAdd.Location = new System.Drawing.Point(34, 133);
+            this.ptAdd.Name = "ptAdd";
+            this.ptAdd.Size = new System.Drawing.Size(36, 30);
+            this.ptAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptAdd.TabIndex = 8;
+            this.ptAdd.TabStop = false;
+            this.ptAdd.Click += new System.EventHandler(this.ptAdd_Click);
             // 
-            // mAMHDataGridViewTextBoxColumn
+            // ptDelete
             // 
-            this.mAMHDataGridViewTextBoxColumn.DataPropertyName = "MAMH";
-            this.mAMHDataGridViewTextBoxColumn.HeaderText = "MAMH";
-            this.mAMHDataGridViewTextBoxColumn.Name = "mAMHDataGridViewTextBoxColumn";
+            this.ptDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptDelete.Image = ((System.Drawing.Image)(resources.GetObject("ptDelete.Image")));
+            this.ptDelete.Location = new System.Drawing.Point(76, 133);
+            this.ptDelete.Name = "ptDelete";
+            this.ptDelete.Size = new System.Drawing.Size(36, 30);
+            this.ptDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptDelete.TabIndex = 8;
+            this.ptDelete.TabStop = false;
+            this.ptDelete.Click += new System.EventHandler(this.ptDelete_Click);
             // 
-            // tENMHDataGridViewTextBoxColumn
+            // ptEdit
             // 
-            this.tENMHDataGridViewTextBoxColumn.DataPropertyName = "TENMH";
-            this.tENMHDataGridViewTextBoxColumn.HeaderText = "TENMH";
-            this.tENMHDataGridViewTextBoxColumn.Name = "tENMHDataGridViewTextBoxColumn";
+            this.ptEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptEdit.Image = ((System.Drawing.Image)(resources.GetObject("ptEdit.Image")));
+            this.ptEdit.Location = new System.Drawing.Point(118, 133);
+            this.ptEdit.Name = "ptEdit";
+            this.ptEdit.Size = new System.Drawing.Size(36, 30);
+            this.ptEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptEdit.TabIndex = 8;
+            this.ptEdit.TabStop = false;
+            this.ptEdit.Click += new System.EventHandler(this.ptEdit_Click);
+            // 
+            // txtVal
+            // 
+            this.txtVal.Location = new System.Drawing.Point(161, 142);
+            this.txtVal.Name = "txtVal";
+            this.txtVal.Size = new System.Drawing.Size(40, 20);
+            this.txtVal.TabIndex = 11;
+            this.txtVal.Visible = false;
+            // 
+            // lbtb
+            // 
+            this.lbtb.AutoSize = true;
+            this.lbtb.ForeColor = System.Drawing.Color.Red;
+            this.lbtb.Location = new System.Drawing.Point(35, 360);
+            this.lbtb.Name = "lbtb";
+            this.lbtb.Size = new System.Drawing.Size(35, 13);
+            this.lbtb.TabIndex = 12;
+            this.lbtb.Text = "label4";
             // 
             // btnCancel
             // 
@@ -262,6 +274,7 @@ namespace SaSa.Forms.Product
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextColor = System.Drawing.Color.Black;
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -286,39 +299,51 @@ namespace SaSa.Forms.Product
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextColor = System.Drawing.Color.Black;
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(4, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 33);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // FormProductType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(479, 405);
+            this.Controls.Add(this.lbtb);
+            this.Controls.Add(this.txtVal);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.ptEdit);
             this.Controls.Add(this.ptDelete);
             this.Controls.Add(this.ptAdd);
-            this.Controls.Add(this.btnimg);
             this.Controls.Add(this.drvProductType);
-            this.Controls.Add(this.pt_img);
             this.Controls.Add(this.txtTENMH);
             this.Controls.Add(this.txtMAMH);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormProductType";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProductType";
             this.Load += new System.EventHandler(this.FormProductType_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelTitle.ResumeLayout(false);
+            this.panelTitle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pt_img)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drvProductType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtsProductType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtsProductType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,16 +351,14 @@ namespace SaSa.Forms.Product
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelTitle;
         private System.Windows.Forms.PictureBox ptClose;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtMAMH;
         private System.Windows.Forms.TextBox txtTENMH;
-        private System.Windows.Forms.PictureBox pt_img;
         private System.Windows.Forms.DataGridView drvProductType;
-        private System.Windows.Forms.Button btnimg;
         private System.Windows.Forms.PictureBox ptAdd;
         private System.Windows.Forms.PictureBox ptDelete;
         private System.Windows.Forms.PictureBox ptEdit;
@@ -349,5 +372,8 @@ namespace SaSa.Forms.Product
         private System.Windows.Forms.DataGridViewTextBoxColumn mAMHDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tENMHDataGridViewTextBoxColumn;
         private System.Data.DataColumn dataColumn3;
+        private System.Windows.Forms.TextBox txtVal;
+        private System.Windows.Forms.Label lbtb;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
