@@ -14,6 +14,27 @@ namespace SaSa.DAL
         //--- 1. Khai báo biến thuộc lớp SqlConnection
         public static SqlConnection myconn = null;
 
+        //test
+        //public bool DBKetNoi(DTO.DTO_Connect lg)
+        //{
+        //    try
+        //    {
+        //        myconn = new SqlConnection("Data Source=" + lg.Data + "");
+        //        myconn.Open(); //-- Mở kết nối CSDL
+        //        return true;
+        //    }
+        //    catch (Exception x)
+        //    {
+        //        MessageBox.Show(x.ToString(), "Thông báo", MessageBoxButtons.OK);
+        //        return false;
+        //    }
+        //}
+
+        //test
+
+
+
+
         ////--- 2. Viết hàm kết nối CSDL
         public bool DBKetNoi(DTO.DTO_Connect lg)
         {
@@ -32,6 +53,15 @@ namespace SaSa.DAL
                 return false;
             }
         }
+
+
+
+
+
+
+
+
+
 
         //internal bool DBKetNoi(DAL_Connect lg)
         //{

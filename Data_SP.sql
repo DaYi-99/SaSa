@@ -299,14 +299,14 @@ create procedure HDB_TAOMAHDB
 as
 begin
 	---- Trường hợp 1: Chưa có hoá đơn bán nào
-	if not exists (select * from HDB_Tam)
+	if not exists (select * from HDB)
 	select 'HDB_' + '00001'
 
 	---- Trường hợp 2: Đã có hoá đơn trong database
 	else 
 	begin
 		declare @hdb1 char(10), @hdb2 char(10)
-		select @hdb1 = max(MAHDB) from HDB_Tam
+		select @hdb1 = max(MAHDB) from HDB
 		set  @hdb2 = right(rtrim(@hdb1),5) + 1
 		if len(@hdb2) = 1
 		select 'HDB_' + '0000' + @hdb2

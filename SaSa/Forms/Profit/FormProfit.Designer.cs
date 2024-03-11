@@ -31,6 +31,7 @@ namespace SaSa.Forms.Profit
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProfit));
             this.panelTitle = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ptMin = new System.Windows.Forms.PictureBox();
             this.ptClose = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -93,8 +94,12 @@ namespace SaSa.Forms.Profit
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txttongchi = new System.Windows.Forms.TextBox();
+            this.txttongthu = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.panelTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).BeginInit();
             this.panel1.SuspendLayout();
@@ -115,7 +120,6 @@ namespace SaSa.Forms.Profit
             ((System.ComponentModel.ISupportInitialize)(this.dtsThu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).BeginInit();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTitle
@@ -131,6 +135,16 @@ namespace SaSa.Forms.Profit
             this.panelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseDown);
             this.panelTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseMove);
             this.panelTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTitle_MouseUp);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(7, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(31, 28);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // ptMin
             // 
@@ -417,6 +431,8 @@ namespace SaSa.Forms.Profit
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.txttongchi);
+            this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.label6);
@@ -619,6 +635,8 @@ namespace SaSa.Forms.Profit
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.txttongthu);
+            this.panel5.Controls.Add(this.label11);
             this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.label8);
             this.panel5.Controls.Add(this.label9);
@@ -698,15 +716,37 @@ namespace SaSa.Forms.Profit
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
             this.comboBox4.TabIndex = 0;
             // 
-            // pictureBox1
+            // label10
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(7, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(31, 28);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(22, 62);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Tổng Chi";
+            // 
+            // txttongchi
+            // 
+            this.txttongchi.Location = new System.Drawing.Point(101, 58);
+            this.txttongchi.Name = "txttongchi";
+            this.txttongchi.Size = new System.Drawing.Size(100, 20);
+            this.txttongchi.TabIndex = 4;
+            // 
+            // txttongthu
+            // 
+            this.txttongthu.Location = new System.Drawing.Point(101, 62);
+            this.txttongthu.Name = "txttongthu";
+            this.txttongthu.Size = new System.Drawing.Size(100, 20);
+            this.txttongthu.TabIndex = 6;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 65);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(54, 13);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Tổng Thu";
             // 
             // FormProfit
             // 
@@ -720,6 +760,7 @@ namespace SaSa.Forms.Profit
             this.Text = "FormProfit";
             this.Load += new System.EventHandler(this.FormProfit_Load);
             this.panelTitle.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -743,7 +784,6 @@ namespace SaSa.Forms.Profit
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -814,5 +854,9 @@ namespace SaSa.Forms.Profit
         private System.Data.DataColumn dataColumn11;
         private System.Data.DataColumn dataColumn12;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox txttongchi;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txttongthu;
+        private System.Windows.Forms.Label label11;
     }
 }

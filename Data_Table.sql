@@ -12,7 +12,7 @@ create table NHANVIEN
 	PW		CHAR(30)
 )
 
-insert into NHANVIEN values ('NV_0001',N'Hoàng Nghĩa','0859693918','261508141',GETDATE(),'','dayi','1')
+insert into NHANVIEN values ('NV_0001',N'Nghĩa','0937693918','261508141',GETDATE(),'','dayi','1')
 
 
 drop table KHACHHANG
@@ -175,14 +175,3 @@ delete from HDB_CT_Tam
 select SUM(THANHTIEN) from HDB_CT_Tam where MAHDB= 'HDB_00003'
 
 select a.TENKH from KHACHHANG as a, HDB_Tam as b where a.MAKH = b.MAKH 
-
-
--- hoa don ban
-	alter table HDB_CT nocheck constraint all 
-	delete from HDB
-	alter table HDB_CT check constraint all
-delete from HDB_CT 
-
--- hoa don ban - tam
-delete from HDB_Tam
-delete from HDB_CT_Tam

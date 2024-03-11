@@ -35,6 +35,12 @@ namespace SaSa.Forms.Invoice
             this.ptClose = new System.Windows.Forms.PictureBox();
             this.lbTenkh = new System.Windows.Forms.Label();
             this.drvInfoDDH = new System.Windows.Forms.DataGridView();
+            this.sTTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mASPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tENSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.soluongDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dongiaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thanhtienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtsInfoDDH = new System.Data.DataSet();
             this.dataTable1 = new System.Data.DataTable();
             this.dataColumn1 = new System.Data.DataColumn();
@@ -42,13 +48,11 @@ namespace SaSa.Forms.Invoice
             this.dataColumn3 = new System.Data.DataColumn();
             this.dataColumn4 = new System.Data.DataColumn();
             this.dataColumn5 = new System.Data.DataColumn();
-            this.sTTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tENSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dONGIADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tHANHTIENDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataColumn6 = new System.Data.DataColumn();
             this.txthdb = new System.Windows.Forms.TextBox();
             this.txtmakh = new System.Windows.Forms.TextBox();
+            this.btnInHD = new System.Windows.Forms.Button();
+            this.txtTongtien = new System.Windows.Forms.TextBox();
             this.panelTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).BeginInit();
@@ -89,6 +93,7 @@ namespace SaSa.Forms.Invoice
             this.ptClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ptClose.TabIndex = 0;
             this.ptClose.TabStop = false;
+            this.ptClose.Click += new System.EventHandler(this.ptClose_Click);
             // 
             // lbTenkh
             // 
@@ -107,16 +112,53 @@ namespace SaSa.Forms.Invoice
             this.drvInfoDDH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.drvInfoDDH.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sTTDataGridViewTextBoxColumn,
+            this.mASPDataGridViewTextBoxColumn,
             this.tENSPDataGridViewTextBoxColumn,
-            this.sLDataGridViewTextBoxColumn,
-            this.dONGIADataGridViewTextBoxColumn,
-            this.tHANHTIENDataGridViewTextBoxColumn});
+            this.soluongDataGridViewTextBoxColumn,
+            this.dongiaDataGridViewTextBoxColumn,
+            this.thanhtienDataGridViewTextBoxColumn});
             this.drvInfoDDH.DataMember = "DDH";
             this.drvInfoDDH.DataSource = this.dtsInfoDDH;
             this.drvInfoDDH.Location = new System.Drawing.Point(30, 80);
             this.drvInfoDDH.Name = "drvInfoDDH";
-            this.drvInfoDDH.Size = new System.Drawing.Size(563, 252);
+            this.drvInfoDDH.Size = new System.Drawing.Size(563, 226);
             this.drvInfoDDH.TabIndex = 6;
+            // 
+            // sTTDataGridViewTextBoxColumn
+            // 
+            this.sTTDataGridViewTextBoxColumn.DataPropertyName = "STT";
+            this.sTTDataGridViewTextBoxColumn.HeaderText = "STT";
+            this.sTTDataGridViewTextBoxColumn.Name = "sTTDataGridViewTextBoxColumn";
+            // 
+            // mASPDataGridViewTextBoxColumn
+            // 
+            this.mASPDataGridViewTextBoxColumn.DataPropertyName = "MASP";
+            this.mASPDataGridViewTextBoxColumn.HeaderText = "MASP";
+            this.mASPDataGridViewTextBoxColumn.Name = "mASPDataGridViewTextBoxColumn";
+            // 
+            // tENSPDataGridViewTextBoxColumn
+            // 
+            this.tENSPDataGridViewTextBoxColumn.DataPropertyName = "TENSP";
+            this.tENSPDataGridViewTextBoxColumn.HeaderText = "TENSP";
+            this.tENSPDataGridViewTextBoxColumn.Name = "tENSPDataGridViewTextBoxColumn";
+            // 
+            // soluongDataGridViewTextBoxColumn
+            // 
+            this.soluongDataGridViewTextBoxColumn.DataPropertyName = "soluong";
+            this.soluongDataGridViewTextBoxColumn.HeaderText = "soluong";
+            this.soluongDataGridViewTextBoxColumn.Name = "soluongDataGridViewTextBoxColumn";
+            // 
+            // dongiaDataGridViewTextBoxColumn
+            // 
+            this.dongiaDataGridViewTextBoxColumn.DataPropertyName = "dongia";
+            this.dongiaDataGridViewTextBoxColumn.HeaderText = "dongia";
+            this.dongiaDataGridViewTextBoxColumn.Name = "dongiaDataGridViewTextBoxColumn";
+            // 
+            // thanhtienDataGridViewTextBoxColumn
+            // 
+            this.thanhtienDataGridViewTextBoxColumn.DataPropertyName = "thanhtien";
+            this.thanhtienDataGridViewTextBoxColumn.HeaderText = "thanhtien";
+            this.thanhtienDataGridViewTextBoxColumn.Name = "thanhtienDataGridViewTextBoxColumn";
             // 
             // dtsInfoDDH
             // 
@@ -131,7 +173,8 @@ namespace SaSa.Forms.Invoice
             this.dataColumn2,
             this.dataColumn3,
             this.dataColumn4,
-            this.dataColumn5});
+            this.dataColumn5,
+            this.dataColumn6});
             this.dataTable1.TableName = "DDH";
             // 
             // dataColumn1
@@ -140,52 +183,26 @@ namespace SaSa.Forms.Invoice
             // 
             // dataColumn2
             // 
-            this.dataColumn2.ColumnName = "TENSP";
+            this.dataColumn2.ColumnName = "MASP";
             // 
             // dataColumn3
             // 
-            this.dataColumn3.ColumnName = "SL";
-            this.dataColumn3.DataType = typeof(int);
+            this.dataColumn3.ColumnName = "TENSP";
             // 
             // dataColumn4
             // 
-            this.dataColumn4.ColumnName = "DONGIA";
-            this.dataColumn4.DataType = typeof(decimal);
+            this.dataColumn4.ColumnName = "soluong";
+            this.dataColumn4.DataType = typeof(int);
             // 
             // dataColumn5
             // 
-            this.dataColumn5.ColumnName = "THANHTIEN";
+            this.dataColumn5.ColumnName = "dongia";
             this.dataColumn5.DataType = typeof(decimal);
             // 
-            // sTTDataGridViewTextBoxColumn
+            // dataColumn6
             // 
-            this.sTTDataGridViewTextBoxColumn.DataPropertyName = "STT";
-            this.sTTDataGridViewTextBoxColumn.HeaderText = "STT";
-            this.sTTDataGridViewTextBoxColumn.Name = "sTTDataGridViewTextBoxColumn";
-            // 
-            // tENSPDataGridViewTextBoxColumn
-            // 
-            this.tENSPDataGridViewTextBoxColumn.DataPropertyName = "TENSP";
-            this.tENSPDataGridViewTextBoxColumn.HeaderText = "TENSP";
-            this.tENSPDataGridViewTextBoxColumn.Name = "tENSPDataGridViewTextBoxColumn";
-            // 
-            // sLDataGridViewTextBoxColumn
-            // 
-            this.sLDataGridViewTextBoxColumn.DataPropertyName = "SL";
-            this.sLDataGridViewTextBoxColumn.HeaderText = "SL";
-            this.sLDataGridViewTextBoxColumn.Name = "sLDataGridViewTextBoxColumn";
-            // 
-            // dONGIADataGridViewTextBoxColumn
-            // 
-            this.dONGIADataGridViewTextBoxColumn.DataPropertyName = "DONGIA";
-            this.dONGIADataGridViewTextBoxColumn.HeaderText = "DONGIA";
-            this.dONGIADataGridViewTextBoxColumn.Name = "dONGIADataGridViewTextBoxColumn";
-            // 
-            // tHANHTIENDataGridViewTextBoxColumn
-            // 
-            this.tHANHTIENDataGridViewTextBoxColumn.DataPropertyName = "THANHTIEN";
-            this.tHANHTIENDataGridViewTextBoxColumn.HeaderText = "THANHTIEN";
-            this.tHANHTIENDataGridViewTextBoxColumn.Name = "tHANHTIENDataGridViewTextBoxColumn";
+            this.dataColumn6.ColumnName = "thanhtien";
+            this.dataColumn6.DataType = typeof(decimal);
             // 
             // txthdb
             // 
@@ -202,11 +219,31 @@ namespace SaSa.Forms.Invoice
             this.txtmakh.TabIndex = 7;
             this.txtmakh.TextChanged += new System.EventHandler(this.txtmakh_TextChanged);
             // 
+            // btnInHD
+            // 
+            this.btnInHD.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInHD.Location = new System.Drawing.Point(518, 312);
+            this.btnInHD.Name = "btnInHD";
+            this.btnInHD.Size = new System.Drawing.Size(75, 23);
+            this.btnInHD.TabIndex = 8;
+            this.btnInHD.Text = "In hoá đơn";
+            this.btnInHD.UseVisualStyleBackColor = true;
+            this.btnInHD.Click += new System.EventHandler(this.btnInHD_Click);
+            // 
+            // txtTongtien
+            // 
+            this.txtTongtien.Location = new System.Drawing.Point(30, 309);
+            this.txtTongtien.Name = "txtTongtien";
+            this.txtTongtien.Size = new System.Drawing.Size(100, 20);
+            this.txtTongtien.TabIndex = 9;
+            // 
             // FormInfoInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 450);
+            this.ClientSize = new System.Drawing.Size(623, 341);
+            this.Controls.Add(this.txtTongtien);
+            this.Controls.Add(this.btnInHD);
             this.Controls.Add(this.txtmakh);
             this.Controls.Add(this.txthdb);
             this.Controls.Add(this.drvInfoDDH);
@@ -214,6 +251,7 @@ namespace SaSa.Forms.Invoice
             this.Controls.Add(this.panelTopBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormInfoInvoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormInfoInvoice";
             this.Load += new System.EventHandler(this.FormInfoInvoice_Load);
             this.panelTopBar.ResumeLayout(false);
@@ -235,11 +273,6 @@ namespace SaSa.Forms.Invoice
         private System.Windows.Forms.Label lbTenkh;
         private System.Windows.Forms.DataGridView drvInfoDDH;
         private System.Data.DataSet dtsInfoDDH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sTTDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tENSPDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sLDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dONGIADataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tHANHTIENDataGridViewTextBoxColumn;
         private System.Data.DataTable dataTable1;
         private System.Data.DataColumn dataColumn1;
         private System.Data.DataColumn dataColumn2;
@@ -248,5 +281,14 @@ namespace SaSa.Forms.Invoice
         private System.Data.DataColumn dataColumn5;
         private System.Windows.Forms.TextBox txthdb;
         private System.Windows.Forms.TextBox txtmakh;
+        private System.Windows.Forms.Button btnInHD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTTDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mASPDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tENSPDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn soluongDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dongiaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn thanhtienDataGridViewTextBoxColumn;
+        private System.Data.DataColumn dataColumn6;
+        private System.Windows.Forms.TextBox txtTongtien;
     }
 }

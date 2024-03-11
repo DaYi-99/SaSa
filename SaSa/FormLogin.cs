@@ -27,13 +27,22 @@ namespace SaSa
         public static string UI = string.Empty;
         public static string PW = string.Empty;
 
+        //test
+        public static string DT = string.Empty;
+
         private void btn_Login_Click(object sender, EventArgs e)
         {
+            //test
+            //DT = @"(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\DaYi_Projects\Asp.Net\Winform\SaSa\SaSa\DatabaseLo.mdf;Integrated Security=True";
+
+            //DTO.DTO_Connect lg = new DTO.DTO_Connect(DT);
+            //test
+
             // truy cập cơ sở dữ liệu
-            SN = @"HARRY\SQLEXPRESS";
+            SN = @"HARRY\ASUS";
             DB = "SQL_SaSa";
             UI = "sa";
-            PW = "123";
+            PW = "25031999";
 
             DTO.DTO_Connect lg = new DTO.DTO_Connect(SN, DB, UI, PW);
 
