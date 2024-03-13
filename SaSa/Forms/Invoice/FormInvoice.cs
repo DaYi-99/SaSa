@@ -29,10 +29,118 @@ namespace SaSa.Forms.Invoice
             this.SetStyle(ControlStyles.ResizeRedraw, true);
         }
 
+        private void FormInvoice_Load(object sender, EventArgs e)
+        {
+            //Tạo câu hỏi khách hàng mới
+            DialogResult tb = MessageBox.Show("Đây có phải là khách hàng mới", "Thông báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (tb == DialogResult.Yes)
+            {
+                // Nếu là khách hàng mới thì khởi tạo mã kh
+                SqlDataReader dr = bus_kh.getDataStoredProcedure("KH_TAOMAKH");
+                if (dr.Read() == true)
+                {
+                    this.txtmakh.Text = dr.GetString(0).ToString();
+                }
+                dr.Close();
+                txttenkh.Show();
+                cbotenkh.Hide();
+            }
+            // Nếu là kh cũ thì cho chọn tên khách hàng
+            else if (tb == DialogResult.No)
+            {
+                txttenkh.Hide();
+                cbotenkh.Show();
+                txtdiachi.Enabled = false;
+                txtsdt.Enabled = false;
+                cbokh();
+            }
+
+            // Khởi tạo mã hoá đơn bán
+            SqlDataReader hdb = bus_invoice.getDataStoredProcedure("HDB_TAOMAHDB");
+            if (hdb.Read() == true)
+            {
+                this.txtmahd.Text = hdb.GetString(0).ToString();
+            }
+            hdb.Close();
 
 
+            txtmakh.Enabled = false;
 
-        // Set di chuyển form theo thanh tiêu đề -- O
+            cbonv();
+            cbosp();
+
+            txtdongia.Enabled = false;
+            btnThem.Enabled = false;
+
+            lbtongtien.Hide();
+            lbtonghd.Hide();
+            lbdv.Hide();
+        }
+
+        #region chuyen so thanh chu
+        String[] units = { "Không", "Một", "Hai", "Ba","Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười Một",
+                            "Mười Hai", "Mười Ba", "Mười Bốn", "Mười Lăm", "Mười Sáu",
+                            "Mười Bảy", "Mười Tám", "Mười Chín" };
+        String[] tens = { "", "", "Hai Mươi", "Ba Mươi", "Bốn Mươi", "Năm Mươi", "Sáu Mươi", "Bảy Mươi", "Tám Mươi", "Chín Mươi" };
+
+        public String ConvertAmount(double amount)
+        {
+            try
+            {
+                Int64 amount_int = (Int64)amount;
+                Int64 amount_dec = (Int64)Math.Round((amount - (double)(amount_int)) * 100);
+                if (amount_dec == 0)
+                {
+                    return Cast(amount_int) + " Ngàn.";
+                }
+                else
+                {
+                    return Cast(amount_int) + " Point " + Cast(amount_dec) + " Only.";
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO: handle exception  
+            }
+            return "";
+        }
+
+        public String Cast(Int64 i)
+        {
+            if (i < 20)
+            {
+                return units[i];
+            }
+            if (i < 100)
+            {
+                return tens[i / 10] + ((i % 10 > 0) ? " " + Cast(i % 10) : "");
+            }
+            if (i < 1000)
+            {
+                return units[i / 100] + " Trăm"
+                        + ((i % 100 > 0) ? " " + Cast(i % 100) : "");
+            }
+            if (i < 100000)
+            {
+                return Cast(i / 1000) + " Triệu"
+                + ((i % 1000 > 0) ? " " + Cast(i % 1000) : "");
+            }
+            if (i < 10000000)
+            {
+                return Cast(i / 100000) + " Lakh "
+                        + ((i % 100000 > 0) ? " " + Cast(i % 100000) : "");
+            }
+            if (i < 1000000000)
+            {
+                return Cast(i / 10000000) + " Crore "
+                        + ((i % 10000000 > 0) ? " " + Cast(i % 10000000) : "");
+            }
+            return Cast(i / 1000000000) + " Arab "
+                    + ((i % 1000000000 > 0) ? " " + Cast(i % 1000000000) : "");
+        }
+        #endregion
+
+        #region di chuyen tieu de
         bool drag = false;
         Point star = new Point(0, 0);
         private void panelTopBar_MouseDown(object sender, MouseEventArgs e)
@@ -54,8 +162,9 @@ namespace SaSa.Forms.Invoice
         {
             drag = false;
         }
-        //Set di chuyển form theo thanh tiêu đề -- X
+        #endregion
 
+        #region su kien trong form
 
         // Xử lý nút đóng form
         private void ptClose_Click(object sender, EventArgs e)
@@ -165,6 +274,7 @@ namespace SaSa.Forms.Invoice
             cbotenkh.DataSource = dt;
         }
 
+        #endregion
 
         // Update cột tổng hoá đơn
         private void UpdateTT()
@@ -216,8 +326,29 @@ namespace SaSa.Forms.Invoice
             this.drvHDB.DataSource = myTable;
             r.Close();
         }
+        private void drvHDB_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // FORMAT CHO CỘT ĐƠN GIÁ
+            if (e.ColumnIndex == 4 && e.RowIndex != this.drvHDB.NewRowIndex)
+            {
+                if (drvHDB.Rows[e.RowIndex].Cells[4].Value != null)
+                {
+                    double val = double.Parse(e.Value.ToString());
+                    e.Value = val.ToString("N3");
+                }
+            }
+            // FORMAT CHO CỘT THÀNH TIỀN
+            if (e.ColumnIndex == 5 && e.RowIndex != this.drvHDB.NewRowIndex)
+            {
+                if (drvHDB.Rows[e.RowIndex].Cells[5].Value != null)
+                {
+                    double val = double.Parse(e.Value.ToString());
+                    e.Value = val.ToString("N3");
+                }
+            }
+        }
 
-        
+        #region textchanged
         // fill mã nhân viên theo tên nhân viên
         private void cbotennv_TextChanged(object sender, EventArgs e)
         {
@@ -282,6 +413,15 @@ namespace SaSa.Forms.Invoice
             }
         }
 
+        private void lbtongtien_TextChanged(object sender, EventArgs e)
+        {
+            lbtonghd.Show();
+            lbdv.Show();
+        }
+        #endregion
+
+
+        #region button
         private void btnTaoHD_Click(object sender, EventArgs e)
         {
             // THÊM MỚI KHÁCH HÀNG NẾU LÀ KHÁCH HÀNG MỚI
@@ -306,6 +446,9 @@ namespace SaSa.Forms.Invoice
 
             btnThem.Enabled = true;
             btnTaoHD.Enabled = false;
+
+            btnDatHang.Show();
+            btnInHD.Show();
         }
 
         private void btnDatHang_Click(object sender, EventArgs e)
@@ -396,66 +539,6 @@ namespace SaSa.Forms.Invoice
             lbtongtien.Show();
         }
 
-        private void FormInvoice_Load(object sender, EventArgs e)
-        {
-            //Tạo câu hỏi khách hàng mới
-            DialogResult tb = MessageBox.Show("Đây có phải là khách hàng mới", "Thông báo!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (tb == DialogResult.Yes)
-            {
-                // Nếu là khách hàng mới thì khởi tạo mã kh
-                SqlDataReader dr = bus_kh.getDataStoredProcedure("KH_TAOMAKH");
-                if (dr.Read() == true)
-                {
-                    this.txtmakh.Text = dr.GetString(0).ToString();
-                }
-                dr.Close();
-                txttenkh.Show();
-                cbotenkh.Hide();
-            }
-            // Nếu là kh cũ thì cho chọn tên khách hàng
-            else if (tb == DialogResult.No)
-            {
-                txttenkh.Hide();
-                cbotenkh.Show();
-                txtdiachi.Enabled = false;
-                txtsdt.Enabled = false;
-                cbokh();
-            }
-
-            // Khởi tạo mã hoá đơn bán
-            SqlDataReader hdb = bus_invoice.getDataStoredProcedure("HDB_TAOMAHDB");
-            if (hdb.Read() == true)
-            {
-                this.txtmahd.Text = hdb.GetString(0).ToString();
-            }
-            hdb.Close();
-
-
-
-            if(myTable.Rows.Count > 0)
-            {
-                btnDatHang.Show();
-                btnInHD.Show();
-            }
-            else
-            {
-                btnDatHang.Hide();
-                btnInHD.Hide();
-            }
-
-            txtmakh.Enabled = false;
-
-            cbonv();
-            cbosp();
-
-            txtdongia.Enabled = false;
-            btnThem.Enabled = false;
-
-            lbtongtien.Hide();
-            lbtonghd.Hide();
-            lbdv.Hide();
-        }
-
         private void btnHuyHD_Click(object sender, EventArgs e)
         {
             SqlCommand cmd = new SqlCommand(
@@ -475,101 +558,124 @@ namespace SaSa.Forms.Invoice
             lbdv.Hide();
         }
 
-
-        private void drvHDB_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            // FORMAT CHO CỘT ĐƠN GIÁ
-            if (e.ColumnIndex == 4 && e.RowIndex != this.drvHDB.NewRowIndex)
-            {
-                if (drvHDB.Rows[e.RowIndex].Cells[4].Value != null)
-                {
-                    double val = double.Parse(e.Value.ToString());
-                    e.Value = val.ToString("N3");
-                }
-            }
-            // FORMAT CHO CỘT THÀNH TIỀN
-            if (e.ColumnIndex == 5 && e.RowIndex != this.drvHDB.NewRowIndex)
-            {
-                if (drvHDB.Rows[e.RowIndex].Cells[5].Value != null)
-                {
-                    double val = double.Parse(e.Value.ToString());
-                    e.Value = val.ToString("N3");
-                }
-            }
-        }
-
         private void btnInHD_Click(object sender, EventArgs e)
         {
+            InHD();
+        }
+        #endregion
 
+        private void InHD()
+        {
+            ppd.Document = pd;
+            ppd.ShowDialog();
         }
 
-        private void lbtongtien_TextChanged(object sender, EventArgs e)
+
+        private void pc_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            lbtonghd.Show();
-            lbdv.Show();
-        }
+            //thong tin khach hang
+            var kh = txttenkh.Text;
+            var dc = txtdiachi.Text;
+
+            //thong tin san pham
 
 
+            var y = 70;
+            var w = pd.DefaultPageSettings.PaperSize.Width;
 
-        String[] units  = { "Không", "Một", "Hai", "Ba","Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười Một",
-                            "Mười Hai", "Mười Ba", "Mười Bốn", "Mười Lăm", "Mười Sáu",
-                            "Mười Bảy", "Mười Tám", "Mười Chín" };
-        String[] tens   = { "", "", "Hai Mươi", "Ba Mươi", "Bốn Mươi","Năm Mươi", "Sáu Mươi", "Bảy Mươi", "Tám Mươi", "Chín Mươi" };
+            Image img = Image.FromFile(@"C:\Users\PC\Desktop\ThuyHoang\logo\logo-rm.png");
 
-        public String ConvertAmount(double amount)
-        {
-            try
-            {
-                Int64 amount_int = (Int64)amount;
-                Int64 amount_dec = (Int64)Math.Round((amount - (double)(amount_int)) * 100);
-                if (amount_dec == 0)
-                {
-                    return Cast(amount_int) + " Ngàn.";
-                }
-                else
-                {
-                    return Cast(amount_int) + " Point " + Cast(amount_dec) + " Only.";
-                }
-            }
-            catch (Exception e)
-            {
-                // TODO: handle exception  
-            }
-            return "";
-        }
+            // 1. ten cong ty
+            //e.Graphics.DrawString("Thuyhoang", new Font("Courier New",12,FontStyle.Bold),
+            //    Brushes.Black, new Point(100,20));
+            e.Graphics.DrawImage(img, 30, 30, 100, 80);
+            e.Graphics.DrawString("NHÀ PHÂN PHỐI CÁC LOẠI CỒN VÀ RƯỢU", new Font("Courier New", 20, FontStyle.Bold),
+                Brushes.Black, new Point(w / 2 - 200, 20));
 
-        public String Cast(Int64 i)
-        {
-            if (i < 20)
-            {
-                return units[i];
-            }
-            if (i < 100)
-            {
-                return tens[i / 10] + ((i % 10 > 0) ? " " + Cast(i % 10) : "");
-            }
-            if (i < 1000)
-            {
-                return units[i / 100] + " Trăm"
-                        + ((i % 100 > 0) ? " " + Cast(i % 100) : "");
-            }
-            if (i < 100000)
-            {
-                return Cast(i / 1000) + " Triệu"
-                + ((i % 1000 > 0) ? " " + Cast(i % 1000) : "");
-            }
-            if (i < 10000000)
-            {
-                return Cast(i / 100000) + " Lakh "
-                        + ((i % 100000 > 0) ? " " + Cast(i % 100000) : "");
-            }
-            if (i < 1000000000)
-            {
-                return Cast(i / 10000000) + " Crore "
-                        + ((i % 10000000 > 0) ? " " + Cast(i % 10000000) : "");
-            }
-            return Cast(i / 1000000000) + " Arab "
-                    + ((i % 1000000000 > 0) ? " " + Cast(i % 1000000000) : "");
+            y += 20;
+            e.Graphics.DrawString("THUỶ HOÀNG", new Font("Courier New", 30, FontStyle.Bold),
+                Brushes.Black, new Point(w / 2 - 100, 60));
+
+            y += 20;
+            e.Graphics.DrawString("Địa chỉ: N11-20 KDC Phúc An, Mỹ Hạnh Nam, Đức Hoà, Long An", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(w / 2 - 200, y));
+
+            y += 20;
+            e.Graphics.DrawString("Số điện thoại: 0973 856 085", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(w / 2 - 200, y));
+
+            y += 20;
+            e.Graphics.DrawString("PHIẾU GIAO HÀNG", new Font("Courier New", 16, FontStyle.Bold),
+                Brushes.Black, new Point(w / 2 - 100, y));
+
+            y += 20;
+            e.Graphics.DrawString("Khách hàng:", new Font("Courier New", 16, FontStyle.Bold),
+                Brushes.Black, new Point(100,150));
+
+            y += 20;
+            e.Graphics.DrawString("Địa chỉ:", new Font("Courier New", 16, FontStyle.Bold),
+                Brushes.Black, new Point(100,170));
+
+
+            //dinh dang but ve
+            Pen blackPen = new Pen(Color.Black, 1);
+
+            // toa do theo chieu doc
+            y += 70;
+
+            //dinh nghia 2 diem de ve duong ngang
+            Point p1 = new Point(10, y);
+            Point p2 = new Point(w - 10, y);
+            // ke duong ngang
+            e.Graphics.DrawLine(blackPen, p1, p2);
+
+
+            // body
+            y += 10;
+            e.Graphics.DrawString("STT", new Font("Courier New", 10, FontStyle.Bold),Brushes.Black, new Point(10,y));
+            e.Graphics.DrawString("LOẠI HÀNG", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(50, y));
+            e.Graphics.DrawString("ĐVT", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w/2, y));
+            e.Graphics.DrawString("SL", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w/2+100, y));
+            e.Graphics.DrawString("Đơn giá", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w - 200, y));
+            e.Graphics.DrawString("THÀNH TIỀN", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(w - 100, y));
+
+            //body
+
+
+            //footer
+            y += 40;
+            //dinh nghia 2 diem de ve duong ngang
+            p1 = new Point(10, y);
+            p2 = new Point(w - 10, y);
+            // ke duong ngang
+            e.Graphics.DrawLine(blackPen, p1, p2);
+
+            y += 20;
+            //ngay thang nam
+            e.Graphics.DrawString("Tổng cộng:", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(w - 500, y));
+
+            y += 20;
+            //ngay thang nam
+            e.Graphics.DrawString("ngaythangnam", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(w-300, y));
+
+            y += 20;
+            //ngay thang nam
+            e.Graphics.DrawString("Người Lập Phiếu", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(20, y));
+            e.Graphics.DrawString("Người Giao Hàng", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(280, y));
+            e.Graphics.DrawString("Khách hàng ký thanh toán", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(580, y));
+
+            y += 30;
+            //cam on
+            e.Graphics.DrawString("Cám ơn quý khách, Chúc quý khách phát tài phát lộc", new Font("Courier New", 12, FontStyle.Bold),
+                Brushes.Black, new Point(w/2, y));
+
+
+            //footer
         }
     }
 }

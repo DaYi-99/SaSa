@@ -88,6 +88,8 @@ namespace SaSa.Forms.Invoice
             this.dataColumn4 = new System.Data.DataColumn();
             this.dataColumn5 = new System.Data.DataColumn();
             this.dataColumn6 = new System.Data.DataColumn();
+            this.ppd = new System.Windows.Forms.PrintPreviewDialog();
+            this.pd = new System.Drawing.Printing.PrintDocument();
             this.panelTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).BeginInit();
@@ -657,6 +659,20 @@ namespace SaSa.Forms.Invoice
             this.dataColumn6.ColumnName = "THANHTIEN";
             this.dataColumn6.DataType = typeof(decimal);
             // 
+            // ppd
+            // 
+            this.ppd.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.ppd.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.ppd.ClientSize = new System.Drawing.Size(400, 300);
+            this.ppd.Enabled = true;
+            this.ppd.Icon = ((System.Drawing.Icon)(resources.GetObject("ppd.Icon")));
+            this.ppd.Name = "ppd";
+            this.ppd.Visible = false;
+            // 
+            // pd
+            // 
+            this.pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pc_PrintPage);
+            // 
             // FormInvoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,5 +764,7 @@ namespace SaSa.Forms.Invoice
         private System.Windows.Forms.TextBox txttenkh;
         private System.Windows.Forms.Label lbdv;
         private System.Windows.Forms.Label lbtongtien;
+        private System.Windows.Forms.PrintPreviewDialog ppd;
+        private System.Drawing.Printing.PrintDocument pd;
     }
 }

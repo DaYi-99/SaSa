@@ -56,7 +56,8 @@ namespace SaSa
             this.label1 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.lvddh = new System.Windows.Forms.ListView();
+            this.lbsl = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.menuMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptClose)).BeginInit();
             this.SuspendLayout();
@@ -165,7 +166,6 @@ namespace SaSa
             this.mnuHDB.Name = "mnuHDB";
             this.mnuHDB.Size = new System.Drawing.Size(160, 22);
             this.mnuHDB.Text = "Hoá đơn bán";
-            
             // 
             // hdb_Create
             // 
@@ -292,14 +292,25 @@ namespace SaSa
             this.label2.TabIndex = 7;
             this.label2.Text = "ĐƠN ĐẶT HÀNG";
             // 
-            // lvddh
+            // lbsl
             // 
-            this.lvddh.HideSelection = false;
-            this.lvddh.Location = new System.Drawing.Point(231, 107);
-            this.lvddh.Name = "lvddh";
-            this.lvddh.Size = new System.Drawing.Size(121, 97);
-            this.lvddh.TabIndex = 8;
-            this.lvddh.UseCompatibleStateImageBehavior = false;
+            this.lbsl.AutoSize = true;
+            this.lbsl.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbsl.Location = new System.Drawing.Point(193, 165);
+            this.lbsl.Name = "lbsl";
+            this.lbsl.Size = new System.Drawing.Size(70, 25);
+            this.lbsl.TabIndex = 8;
+            this.lbsl.Text = "label3";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(195, 207);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(55, 13);
+            this.linkLabel1.TabIndex = 9;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "linkLabel1";
             // 
             // FormMain
             // 
@@ -307,7 +318,8 @@ namespace SaSa
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(810, 420);
-            this.Controls.Add(this.lvddh);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.lbsl);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.label1);
@@ -356,7 +368,8 @@ namespace SaSa
         private System.Windows.Forms.ToolStripMenuItem hdb_View;
         private System.Windows.Forms.ToolStripMenuItem đơnĐặtHàngToolStripMenuItem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView lvddh;
+        private System.Windows.Forms.Label lbsl;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

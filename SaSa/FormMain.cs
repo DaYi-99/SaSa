@@ -37,18 +37,85 @@ namespace SaSa
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            SqlDataAdapter s = new SqlDataAdapter("Select MAKH from HDB_Tam",
-                    DAL_Connect.myconn);
-            s.Fill(myTable);
+            //SqlDataAdapter s = new SqlDataAdapter("Select MAKH from HDB_Tam",
+            //        DAL_Connect.myconn);
+            //s.Fill(myTable);
 
-            foreach (DataRow row in myTable.Rows)
-            {
-                ListViewItem item = new ListViewItem(row["MAKH"].ToString());
-                //item.SubItems.Add(row[""].ToString());
-                lvddh.Items.Add(item);
-            }
-            lvddh.View = View.List;
+            //foreach (DataRow row in myTable.Rows)
+            //{
+            //    ListViewItem item = new ListViewItem(row["MAKH"].ToString());
+            //    //item.SubItems.Add(row[""].ToString());
+            //    lvddh.Items.Add(item);
+            //}
+            //lvddh.View = View.List;
+
+            //Check_SP();
         }
+
+
+        private void Check_SP()
+        {
+            string rccp, rcl1, lausan, connuoc, conthach;
+
+            SqlCommand crccp = new SqlCommand("select sum(SLTON) from SANPHAM where MASP ='sp_01' ", DAL_Connect.myconn);
+            SqlDataReader rrccp = crccp.ExecuteReader();
+            rrccp.Read();
+            rccp = rrccp[0].ToString();
+            rrccp.Close();
+
+            SqlCommand crcl1 = new SqlCommand("select sum(SLTON) from SANPHAM where MASP ='sp_01' ", DAL_Connect.myconn);
+            SqlDataReader rrcl1 = crcl1.ExecuteReader();
+            rrcl1.Read();
+            rcl1 = rrcl1[0].ToString();
+            rrcl1.Close();
+
+            SqlCommand clausan = new SqlCommand("select sum(SLTON) from SANPHAM where MASP ='sp_01' ", DAL_Connect.myconn);
+            SqlDataReader rlausan = clausan.ExecuteReader();
+            rlausan.Read();
+            lausan = rlausan[0].ToString();
+            rlausan.Close();
+
+            SqlCommand cconnuoc = new SqlCommand("select sum(SLTON) from SANPHAM where MASP ='sp_01' ", DAL_Connect.myconn);
+            SqlDataReader rconnuoc = cconnuoc.ExecuteReader();
+            rconnuoc.Read();
+            connuoc = rconnuoc[0].ToString();
+            rconnuoc.Close();
+
+            SqlCommand cconthach = new SqlCommand("select sum(SLTON) from SANPHAM where MASP ='sp_01' ", DAL_Connect.myconn);
+            SqlDataReader rconthach = cconthach.ExecuteReader();
+            rconthach.Read();
+            conthach = rconthach[0].ToString();
+            rconthach.Close();
+
+            if(int.Parse(rccp)  <= 5)
+            {
+                lbsl.Text = "Nước rửa chén CP còn 5 can";
+            }
+            else if (int.Parse(rcl1) <= 3)
+            {
+                lbsl.Text = "Nước rửa chén loại 1 còn 3 can";
+      
+            }
+            else if (int.Parse(lausan) <= 3)
+            {
+                lbsl.Text = "Nước lau sàn còn 3 can";
+            
+            }
+            else if (int.Parse(conthach) <= 10)
+            {
+                lbsl.Text = "ồn thạch còn 10 thùng";
+               
+            }
+            else if (int.Parse(connuoc) <= 10)
+            {
+                lbsl.Text = "Cồn nước còn 10 can";
+              
+            }
+
+
+        }
+
+
 
         private void ptClose_Click(object sender, EventArgs e)
         {
